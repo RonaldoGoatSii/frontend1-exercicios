@@ -1,0 +1,6 @@
+{
+    "utilizador": [
+        {"nome": "Francisco", "idade": 32, "nacionalidade": "portugues"},
+        {"nome": "Jason", "idade": 17, "nacionalidade": "ingles"}
+    ]
+}
