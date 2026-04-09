@@ -4,7 +4,7 @@ let obj = {
     email: "ronaldo@gmail.com"
 };
 
-// converter para JSON (string)
+// converter o objeto para JSON (string)
 let json = JSON.stringify(obj);
 
 // mostrar na consola
@@ -19,7 +19,7 @@ console.log(js.nome)
 
 // dar import do ficheiro JSON 
 fetch("data.json")
-    .then(response => response.json())
+    .then(response => response.json()) 
     .then(data => {
         console.log(data);
         document.getElementById("nacionalidade")
