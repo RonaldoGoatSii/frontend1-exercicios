@@ -48,5 +48,5 @@ let button = document.getElementById("themeBtn");
             texto.textContent = "Tema atual: " + novoTema;
 
             // (opcional) ver no console
-            console.log("Tema guardado:", novoTema);
+            console.log(novoTema);
         });
