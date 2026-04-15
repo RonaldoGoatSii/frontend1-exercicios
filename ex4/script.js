@@ -23,7 +23,7 @@ async function getPosts() {
 
       // usar o appendChild para colocar o "li" dentro da lista <ul>
       listaElement.appendChild(li);
-    });
+    });    
 
   } catch (error) {
     console.error('Erro:', error);
