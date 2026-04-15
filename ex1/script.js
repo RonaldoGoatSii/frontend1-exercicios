@@ -14,7 +14,7 @@ console.log(json);
 let js = JSON.parse(json)
 
 // mostrar uma das propriedades desse objeto
-console.log(js.nome)
+console.log(js)
 
 
 // dar import do ficheiro JSON 

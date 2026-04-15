@@ -9,10 +9,14 @@ formElement.addEventListener("submit", (e) => {
 
     localStorage.setItem("password", passEncriptada);
 
-    console.log(passEncriptada);
+    console.log("Password encriptada:", passEncriptada);
+
+    let passGuardada = localStorage.getItem("password");
+    let decodedPassword = atob(passGuardada);
+
+    console.log("Password desicriptada:", decodedPassword);
+
+    localStorage.setItem("Ahhhh pass", decodedPassword);
+
 });
 
-let passGuardada = localStorage.getItem("password");
-let decodedPassword = atob(passGuardada);
-
-console.log("Password desicriptada:", decodedPassword);
