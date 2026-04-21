@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Splide Slider</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+  <head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  </head>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 40px;
+    }
+
+    .splide__slide img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="animate__animated animate__bounce">An animated element</h1>
+    </header>
+
+  <h2>Carrossel</h2>
+
+
+  <div id="slider" class="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+
+        <li class="splide__slide">
+          <img src="https://picsum.photos/400/300">
+        </li>
+
+        <li class="splide__slide">
+          <img src="https://picsum.photos/220/300">
+        </li>
+
+        <li class="splide__slide">
+          <img src="https://picsum.photos/287/300">
+        </li>
+
+        <li class="splide__slide">
+          <img src="https://picsum.photos/200/300">
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+ 
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
