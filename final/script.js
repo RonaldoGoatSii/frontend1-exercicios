@@ -1,16 +1,23 @@
 let form = document.querySelector("form");
 let input = document.querySelector("input");
-
+let list = document.querySelector("ul");
 
 form.addEventListener("submit", function(event) {
     event.preventDefault(); 
     let valueInput = input.value;
-    localStorage.setItem("tasks", valueInput);
+    if (valueInput == ""){
+        return;
+    }
+    localStorage.setItem("tasks_list", valueInput);
+    console.log(valueInput);
 
-    let tasksList = localStorage.getItem("tasks");
-    console.log(tasksList);
+    let li = document.createElement("li")
+    li.textContent = "Task:" + valueInput;
+    list.appendChild(li)
    
+    input.value = ""    
 });
 
 
 
+    
