@@ -1,11 +1,15 @@
-let formElement = document.querySelector("form");
+let form = document.querySelector("form");
 let input = document.querySelector("input");
 
 
-formElement.addEventListener("submit", function(event) {
+form.addEventListener("submit", function(event) {
     event.preventDefault(); 
+    let valueInput = input.value;
+    localStorage.setItem("tasks", valueInput);
 
-    localStorage.setItem("user",  ); 
+    let tasksList = localStorage.getItem("tasks");
+    console.log(tasksList);
+   
 });
 
 
