@@ -1,23 +1,66 @@
-let form = document.querySelector("form");
-let input = document.querySelector("input");
-let list = document.querySelector("ul");
+let form = document.querySelector("#addTask");
+let input = document.querySelector(".list");
+let listHTML = document.querySelector(".list-tasks");
 
-form.addEventListener("submit", function(event) {
-    event.preventDefault(); 
-    let valueInput = input.value;
-    if (valueInput == ""){
-        return;
-    }
-    localStorage.setItem("tasks_list", valueInput);
-    console.log(valueInput);
+let tasks = JSON.parse(localStorage.getItem("tasks_list")) || [];
 
-    let li = document.createElement("li")
-    li.textContent = "Task:" + valueInput;
-    list.appendChild(li)
-   
-    input.value = ""    
+function render() {
+    listHTML.innerHTML = ""; 
+
+    tasks.forEach((task, id) => {
+        let li = document.createElement("li");
+        
+
+        li.innerHTML = `
+            <div class="task-data">
+                <strong>Task: ${task.text}</strong>
+                <br><small>${task.date}</small>
+            </div>
+            <div class="task-actions">
+                <button onclick="editTask(${id})"><i class="fa-solid fa-pen"></i></button>
+                <button onclick="deleteTask(${id})"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `;
+        listHTML.appendChild(li);
+    });
+
+
+    localStorage.setItem("tasks_list", JSON.stringify(tasks));
+}
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault(); 
+    
+    if (input.value.trim() === "") return; 
+
+    let newTask = {
+        text: input.value,
+        date: new Date().toLocaleString('pt-PT') 
+    };
+
+    tasks.push(newTask); 
+    input.value = "";   
+    render();          
+    
+    Swal.fire({ icon: 'success', title: 'Added!', timer: 1000, showConfirmButton: false });
 });
 
 
+function deleteTask(id) {
+    tasks.splice(id, 1); 
+    render();
+    Swal.fire({ icon: 'error', title: 'Deleted!', timer: 1000, showConfirmButton: false });
+}
 
+
+function editTask(id) {
+    let newValue = prompt("Edit your task:", tasks[id].text);
     
+    if (newValue && newValue.trim() !== "") {
+        tasks[id].text = newValue;
+        render();
+        Swal.fire({ icon: 'info', title: 'Updated!', timer: 1000, showConfirmButton: false });
+    }
+}
+
+render();
