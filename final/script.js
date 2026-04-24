@@ -30,7 +30,7 @@ function render() {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault(); 
-    
+        
     if (input.value.trim() === "") return; 
 
     let newTask = {
