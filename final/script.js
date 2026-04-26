@@ -46,8 +46,13 @@ form.addEventListener("submit", (e) => {
 
 
 function deleteTask(id) {
-    tasks.splice(id, 1); 
-    render();
+    
+    let confirmation = confirm("Are you sure you want to delete this task?");
+    if (confirmation) {
+        tasks.splice(id, 1); 
+        render();   
+        
+    }
     Swal.fire({ icon: 'error', title: 'Deleted!', timer: 1000, showConfirmButton: false });
 }
 
