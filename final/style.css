@@ -1,106 +1,179 @@
-body{
-    margin: 100px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 20px;
     background: #3e1adb;
     background: linear-gradient(90deg, rgba(62, 26, 219, 1) 0%, rgba(77, 129, 168, 1) 36%, rgba(77, 131, 166, 1) 4%, rgba(87, 173, 121, 1) 67%, rgba(237, 221, 83, 1) 100%);
-    
+    min-height: 100vh;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .header {
-  display: flex;
-  justify-content: flex-start; 
-  align-items: flex-start;     
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 20px;
 }
 
 .header img {
-  width: 350px;
-  height: 200px;
-  display: block;
+    max-width: 100%;
+    height: auto;
+    width: 300px; 
+    display: block;
+    transition: transform 0.3s;
 }
 
 .header img:hover {
-  transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+main {
+    width: 100%;
+    max-width: 500px;
 }
 
 .add {
-  background-color: yellowgreen;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: yellowgreen;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
 }
 
+.add h1 {
+    margin-bottom: 15px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+#addTask {
+    display: flex;
+    gap: 10px;
+}
 
 .list {
-  transition: 0.2s;
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    transition: 0.2s;
 }
 
 .list:focus {
-  outline: 2px solid rgba(99, 102, 241, 0.6);
-  background: rgba(0, 0, 0, 0.2);
+    outline: 2px solid rgba(99, 102, 241, 0.6);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 #send {
-  letter-spacing: 0.5px;
+    padding: 10px 15px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
 }
 
 #send:active {
-  transform: scale(0.96);
+    transform: scale(0.96);
 }
 
+.list-tasks {
+    list-style: none;
+    padding: 0;
+}
 
 .list-tasks li {
-  border: 1px solid rgba(53, 235, 13, 0.04);
-  position: relative;
-  overflow: hidden;
-  background-color: yellowgreen;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: yellowgreen;
+    border: 1px solid rgba(53, 235, 13, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.25s ease;
 }
 
 .list-tasks li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 4px;
-  background: #c7eb10;
-  opacity: 0.7;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #c7eb10;
+}
+
+.task-data {
+    flex: 1;
+    margin-right: 10px;
 }
 
 .task-data strong {
-  display: block;
-  margin-bottom: 4px;
+    display: block;
+    word-break: break-word;
 }
 
 .task-data small {
-  opacity: 0.7;
+    opacity: 0.7;
+}
+
+.task-actions {
+    display: flex;
+    gap: 5px;
 }
 
 .task-actions button {
-  padding: 6px;
-  border-radius: 6px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .task-actions button:hover {
-  background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.8);
 }
 
-.task-actions button:last-child:hover {
-  color: #f87171;
+.task-actions button:last-child:hover { color: #dc2626; }
+.task-actions button:first-child:hover { color: #2563eb; }
+
+@media (max-width: 400px) {
+    #addTask {
+        flex-direction: column;
+    }
+    
+    .list-tasks li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .task-actions {
+        align-self: flex-end;
+    }
 }
 
-.task-actions button:first-child:hover {
-  color: #60a5fa;
-}
-
-.list-tasks li {
-  animation: fadeIn 0.25s ease;
+@media (min-width: 768px) {
+    body {
+        margin: 50px auto;
+    }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
 }

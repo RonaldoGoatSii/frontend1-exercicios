@@ -3,7 +3,6 @@ let input = document.querySelector(".list");
 let listHTML = document.querySelector(".list-tasks");
 
 let tasks = JSON.parse(localStorage.getItem("tasks_list")) || [];
-
 function render() {
     listHTML.innerHTML = ""; 
 
