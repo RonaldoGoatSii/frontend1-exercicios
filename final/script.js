@@ -47,13 +47,23 @@ form.addEventListener("submit", (e) => {
 
 function deleteTask(id) {
     
-    let confirmation = confirm("Are you sure you want to delete this task?");
-    if (confirmation) {
-        tasks.splice(id, 1); 
-        render();   
-        
-    }
-    Swal.fire({ icon: 'error', title: 'Deleted!', timer: 1000, showConfirmButton: false });
+    tasks.splice(id, 1); 
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "error"
+        });
+    });
+    render();   
 }
 
 
