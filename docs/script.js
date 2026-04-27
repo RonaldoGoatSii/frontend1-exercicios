@@ -4,6 +4,8 @@ let listHTML = document.querySelector(".list-tasks");
 
 let tasks = JSON.parse(localStorage.getItem("tasks_list")) || [];
 
+console.log("Tasks list:", tasks);
+
 function render() {
     listHTML.innerHTML = ""; 
 
@@ -37,6 +39,7 @@ function render() {
     });
 
     localStorage.setItem("tasks_list", JSON.stringify(tasks));
+
 }
 
 form.addEventListener("submit", (e) => {
@@ -51,6 +54,8 @@ form.addEventListener("submit", (e) => {
     };
 
     tasks.push(newTask); 
+    console.log("Task added:", newTask);
+
     input.value = "";   
     render();          
     
@@ -64,10 +69,15 @@ form.addEventListener("submit", (e) => {
 
 function toggleTask(id) {
     tasks[id].completed = !tasks[id].completed;
+
+    console.log(`Task ${id} adited:`, tasks[id]);
+
     render();
 }
 
 function deleteTask(id) {
+    console.log("Pedido para apagar tarefa:", tasks[id]);
+
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -78,6 +88,8 @@ function deleteTask(id) {
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
+            console.log("Deleted task:", tasks[id]);
+
             tasks.splice(id, 1);
             render();
 
@@ -94,7 +106,12 @@ function editTask(id) {
     let newValue = prompt("Edit your task:", tasks[id].text);
     
     if (newValue && newValue.trim() !== "") {
+        console.log("Antes da edição:", tasks[id]);
+
         tasks[id].text = newValue;
+
+        console.log("Depois da edição:", tasks[id]);
+
         render();
 
         Swal.fire({
