@@ -3,26 +3,38 @@ let input = document.querySelector(".list");
 let listHTML = document.querySelector(".list-tasks");
 
 let tasks = JSON.parse(localStorage.getItem("tasks_list")) || [];
+
 function render() {
     listHTML.innerHTML = ""; 
 
     tasks.forEach((task, id) => {
         let li = document.createElement("li");
-        
 
         li.innerHTML = `
             <div class="task-data">
-                <strong>Task: ${task.text}</strong>
+                <input type="checkbox" 
+                    ${task.completed ? "checked" : ""} 
+                    onchange="toggleTask(${id})">
+
+                <strong style="text-decoration:${task.completed ? 'line-through' : 'none'}">
+                    Task: ${task.text}
+                </strong>
+
                 <br><small>${task.date}</small>
             </div>
+
             <div class="task-actions">
-                <button onclick="editTask(${id})"><i class="fa-solid fa-pen"></i></button>
-                <button onclick="deleteTask(${id})"><i class="fa-solid fa-trash"></i></button>
+                <button onclick="editTask(${id})">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+                <button onclick="deleteTask(${id})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
             </div>
         `;
+
         listHTML.appendChild(li);
     });
-
 
     localStorage.setItem("tasks_list", JSON.stringify(tasks));
 }
@@ -34,20 +46,28 @@ form.addEventListener("submit", (e) => {
 
     let newTask = {
         text: input.value,
-        date: new Date().toLocaleString('pt-PT') 
+        date: new Date().toLocaleString('pt-PT'),
+        completed: false
     };
 
     tasks.push(newTask); 
     input.value = "";   
     render();          
     
-    Swal.fire({ icon: 'success', title: 'Added!', timer: 1000, showConfirmButton: false });
+    Swal.fire({
+        icon: 'success',
+        title: 'Added!',
+        timer: 1000,
+        showConfirmButton: false
+    });
 });
 
+function toggleTask(id) {
+    tasks[id].completed = !tasks[id].completed;
+    render();
+}
 
 function deleteTask(id) {
-    
-    tasks.splice(id, 1); 
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -57,15 +77,18 @@ function deleteTask(id) {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
-        if (result.isConfirmed) Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "error"
-        });
-    });
-    render();   
-}
+        if (result.isConfirmed) {
+            tasks.splice(id, 1);
+            render();
 
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your task has been deleted.",
+                icon: "error"
+            });
+        }
+    });
+}
 
 function editTask(id) {
     let newValue = prompt("Edit your task:", tasks[id].text);
@@ -73,7 +96,13 @@ function editTask(id) {
     if (newValue && newValue.trim() !== "") {
         tasks[id].text = newValue;
         render();
-        Swal.fire({ icon: 'info', title: 'Updated!', timer: 1000, showConfirmButton: false });
+
+        Swal.fire({
+            icon: 'info',
+            title: 'Updated!',
+            timer: 1000,
+            showConfirmButton: false
+        });
     }
 }
 

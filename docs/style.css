@@ -150,6 +150,43 @@ main {
 .task-actions button:last-child:hover { color: #dc2626; }
 .task-actions button:first-child:hover { color: #2563eb; }
 
+
+
+.task-data input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+    transition: all 0.2s ease;
+}
+
+
+.task-data input[type="checkbox"]:hover {
+    border-color: #3085d6;
+}
+
+
+.task-data input[type="checkbox"]:checked {
+    background-color: #3085d6;
+    border-color: #3085d6;
+}
+
+
+.task-data input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+
 @media (max-width: 400px) {
     #addTask {
         flex-direction: column;
